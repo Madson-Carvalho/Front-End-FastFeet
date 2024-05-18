@@ -1,18 +1,19 @@
+import './ReactTable.css';
 import React from "react";
-import { useTable, useFilters, usePagination } from "react-table";
+import {useTable, useFilters, usePagination} from "react-table";
 
-export const TextFilter = ({ column }) => {
-    const { filterValue, setFilter } = column;
+export const TextFilter = ({column}) => {
+    const {filterValue, setFilter} = column;
     return (
-        <input
-            value={filterValue || ""}
-            onChange={e => setFilter(e.target.value || undefined)}
-            placeholder={'Digite para buscar'}
+        <input className="filterInput"
+               value={filterValue || ""}
+               onChange={e => setFilter(e.target.value || undefined)}
+               placeholder={`Digite para buscar`}
         />
     );
 };
 
-export default function ReactTable({ columns, data }) {
+export default function ReactTable({columns, data}) {
     const {
         getTableProps,
         getTableBodyProps,
@@ -24,7 +25,7 @@ export default function ReactTable({ columns, data }) {
         canNextPage,
         canPreviousPage,
         pageOptions,
-        state: { pageIndex, pageSize },
+        state: {pageIndex, pageSize},
         setPageSize
     } = useTable(
         {
@@ -36,13 +37,13 @@ export default function ReactTable({ columns, data }) {
     );
 
     return (
-        <div>
+        <div className="tableListSchema">
             {headerGroups.map(headerGroup => (
-                <div key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
+                <div className="filterInput" key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map(column => (
                         <div key={column.id} {...column.getHeaderProps()}>
-                            {column.render("Header").toUpperCase()}
-                            { column.canFilter ? <TextFilter column={column}/> : null}
+                            {column.enableColumFilter ? <b>{column.render("Header").toUpperCase()}</b> : null}
+                            {column.enableColumFilter ? <TextFilter column={column}/> : null}
                         </div>
                     ))}
                 </div>
@@ -60,7 +61,7 @@ export default function ReactTable({ columns, data }) {
                 ))}
                 </thead>
                 <tbody {...getTableBodyProps()}>
-                {page.map((row, i) => {
+                {page.map((row) => {
                     prepareRow(row);
                     return (
                         <tr key={row.id} {...row.getRowProps()}>
@@ -73,19 +74,19 @@ export default function ReactTable({ columns, data }) {
                 </tbody>
             </table>
             <div>
-                <button className='custombutton' onClick={() => previousPage()} disabled={!canPreviousPage}>
+                <button className='customButton' onClick={() => previousPage()} disabled={!canPreviousPage}>
                     Anterior
                 </button>
-                <button className='custombutton' onClick={() => nextPage()} disabled={!canNextPage}>
+                <button className='customButton' onClick={() => nextPage()} disabled={!canNextPage}>
                     Próxima
                 </button>
-                <div>
+                <div style={{margin: 5}}>
                     Página{' '}
                     <em>
                         {pageIndex + 1} de {pageOptions.length}
                     </em>
                 </div>
-                <select
+                <select style={{padding: 5, borderRadius: 5,  marginBottom: 15}}
                     value={pageSize}
                     onChange={e => {
                         setPageSize(Number(e.target.value));
