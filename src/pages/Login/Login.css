@@ -25,7 +25,6 @@
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
-    /*border: solid 1px #0b3b5b;*/
     width: 40%;
     height: 80%;
     align-items: center;
@@ -35,7 +34,6 @@
 
 #idlogin {
     width: 40%;
-    /* height: 3.5rem; */
     align-self: center;
     cursor: pointer;
     border: solid 2px #0b3b5b;

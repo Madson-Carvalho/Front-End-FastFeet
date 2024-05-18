@@ -5,7 +5,6 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import logoImg from '../../assets/image/logo.png'
 import CustomInput from "../../component/CustomInput/CustomInput";
 
-
 const Login = () => {
     return (
         <>
@@ -26,7 +25,6 @@ const Login = () => {
                 </div>
             </div>
         </>
-
     )
 }
 

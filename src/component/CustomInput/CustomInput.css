@@ -29,7 +29,7 @@
     border: 1px solid var(--primary);
 }
 
-.defaultInputs > input:is(:focus) ~ label {
+.defaultInputs > input:is(:focus, :not(:placeholder-shown)) ~ label {
     transform: translateY(-120%) scale(0.7);
     background-color: #fff;
     padding-inline: 0.3rem;
