@@ -1,6 +1,7 @@
 import './ReactTable.css';
 import React from "react";
 import {useTable, useFilters, usePagination} from "react-table";
+import {TextFilter} from "./FilterTable";
 
 export default function ReactTable({columns, data}) {
     const {
