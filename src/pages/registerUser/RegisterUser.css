@@ -1,0 +1,8 @@
+.base-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem 1rem;
+    gap: 1rem;
+    border-radius: 8px;
+}

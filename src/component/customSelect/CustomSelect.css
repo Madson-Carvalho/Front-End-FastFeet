@@ -1,4 +1,4 @@
-.defaultInputs > input {
+.defaultInputs > select {
     padding: 1rem;
     font-size: 1.2rem;
     border-radius: 8px;
@@ -25,21 +25,13 @@
     transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.defaultInputs > input:focus {
+.defaultInputs > select {
     border: 1px solid var(--primary);
 }
 
-.defaultInputs > input:is(:focus) ~ label {
+.defaultInputs > select ~ label {
     transform: translateY(-120%) scale(0.7);
     background-color: #fff;
     padding-inline: 0.3rem;
     color: var(--primary);
-}
-
-input[type=datetime-local]::-webkit-datetime-edit {
-    color: transparent;
-}
-
-input[type=datetime-local]:focus::-webkit-datetime-edit {
-    color: var(--primary) !important;
 }

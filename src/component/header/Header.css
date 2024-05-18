@@ -8,6 +8,21 @@ header {
     color: #ffffff;
 }
 
+header > nav > a {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 1.25em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #ffffff !important;
+}
+
+header > nav > a:hover {
+    text-decoration: underline;
+    transition: all 0.3s ease;
+}
+
 header > a > svg {
     color: #ffffff !important;
 }
@@ -15,4 +30,9 @@ header > a > svg {
 header > a > img {
     height: 8rem;
     border-radius: 50%;
+}
+
+header > nav {
+    display: flex;
+    gap: 2rem;
 }
