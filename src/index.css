@@ -17,3 +17,53 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.customTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.customTable th, .customTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.customTable th {
+  background-color: #b2dffc;
+  text-align: center;
+}
+
+.customTable tr:nth-child(even) {
+  background-color: #b2dffc;
+}
+
+.customTable tr:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.filterContainer {
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.filterInput {
+  width: 200px;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.custombutton {
+  display: inline-block;
+  padding: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #0475aa;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 2px #999;
+}
