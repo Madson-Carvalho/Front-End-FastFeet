@@ -1,4 +1,18 @@
 header {
     display: flex;
-    background: blue;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    background-image: linear-gradient(to top, #0047ab, #0038a1, #002997, #00188c, #000080);
+    min-height: 5rem;
+    color: #ffffff;
+}
+
+header > a > svg {
+    color: #ffffff !important;
+}
+
+header > img {
+    height: 8rem;
+    border-radius: 50%;
 }
