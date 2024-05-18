@@ -11,7 +11,7 @@ const RegisterUser = () => {
     return (
         <>
             <Header/>
-            <Main>
+            <Main title="Criar usuário">
                 <form className='base-form'>
                     <CustomInput id='name' type='text' name='name' label='Nome'/>
                     <CustomInput id='cpf' type='text' name='cpf' label='CPF'/>
