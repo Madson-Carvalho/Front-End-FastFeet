@@ -86,11 +86,11 @@ export default function ReactTable({columns, data}) {
                         {pageIndex + 1} de {pageOptions.length}
                     </em>
                 </div>
-                <select style={{padding: 5, borderRadius: 5,  marginBottom: 15}}
-                    value={pageSize}
-                    onChange={e => {
-                        setPageSize(Number(e.target.value));
-                    }}
+                <select style={{padding: 5, borderRadius: 5, marginBottom: 15}}
+                        value={pageSize}
+                        onChange={e => {
+                            setPageSize(Number(e.target.value));
+                        }}
                 >
                     {[5, 10, 20].map(pageSize => (
                         <option key={pageSize} value={pageSize}>
