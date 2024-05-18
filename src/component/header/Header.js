@@ -7,9 +7,9 @@ import logo from "../../assets/image/logo-removebg-preview.png";
 const Header = () => {
     return (
         <header>
-            <img src={logo} />
+            <Link to={'/'}><img src={logo} /></Link>
             <nav>
-                <a href={'#'}><FontAwesomeIcon icon={faHome} inverse size="lg" /></a>
+                <Link to={'/'}><FontAwesomeIcon icon={faHome} inverse size="lg" /></Link>
             </nav>
         </header>
     )

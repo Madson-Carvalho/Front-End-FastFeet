@@ -12,7 +12,7 @@ header > a > svg {
     color: #ffffff !important;
 }
 
-header > img {
+header > a > img {
     height: 8rem;
     border-radius: 50%;
 }
