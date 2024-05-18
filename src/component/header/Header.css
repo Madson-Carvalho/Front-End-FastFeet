@@ -16,3 +16,8 @@ header > a > img {
     height: 8rem;
     border-radius: 50%;
 }
+
+header > nav {
+    display: flex;
+    gap: 2rem;
+}
