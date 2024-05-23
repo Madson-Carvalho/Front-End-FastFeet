@@ -1,5 +1,5 @@
 .customTable {
-    width: 100%;
+    width: 98%;
     border-collapse: collapse;
 }
 
@@ -23,20 +23,25 @@
 }
 
 .tableListSchema {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin: 0.625rem;
-    border: 1px solid #ddd;
+    /*border: 1px solid #ddd;*/
     border-radius: 10px;
 }
 
-.filterInput {
-    margin: 0.3125rem 1.25rem;
+.filterContainer {
+    /*margin: 0.3125rem 1.25rem;*/
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     text-align: center;
     border-radius: 8px;
     font-size: 16px;
     padding: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    /*border: 1px solid rgba(0, 0, 0, 0.1);*/
+    min-width: 98%;
 }
 
 .customButton {
@@ -50,4 +55,18 @@
     border: none;
     border-radius: 5px;
     box-shadow: 0 2px #999;
+}
+
+.tableFooter {
+    display: flex;
+    justify-content: space-between;
+    width: 98% ;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tableFooter > select {
+
 }
