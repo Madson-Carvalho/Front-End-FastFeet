@@ -57,7 +57,7 @@ const Home = () => {
         <>
             <Header/>
             <Main>
-                <ReactTable columns={columns} data={data}/>
+                <ReactTable columns={columns} data={data} title="Entregadores"/>
             </Main>
             <Footer/>
         </>

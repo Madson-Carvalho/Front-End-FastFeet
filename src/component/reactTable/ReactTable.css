@@ -9,7 +9,7 @@
 }
 
 .customTable th {
-    background-color: #0047ab;
+    background-color: rgba(0, 71, 171, 0.89);
     text-align: center;
     color: #fff;
 }
@@ -28,20 +28,17 @@
     justify-content: center;
     align-items: center;
     margin: 0.625rem;
-    /*border: 1px solid #ddd;*/
     border-radius: 10px;
 }
 
 .filterContainer {
-    /*margin: 0.3125rem 1.25rem;*/
     display: flex;
     justify-content: flex-end;
     text-align: center;
-    border-radius: 8px;
-    font-size: 16px;
-    padding: 10px;
-    /*border: 1px solid rgba(0, 0, 0, 0.1);*/
+    font-size: 1rem;
+    padding: 1rem 0;
     min-width: 98%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .customButton {
@@ -60,13 +57,33 @@
 .tableFooter {
     display: flex;
     justify-content: space-between;
-    width: 98% ;
+    width: 98%;
     padding: 1rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     border-left: 1px solid rgba(0, 0, 0, 0.1);
     border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.tableFooter > select {
+.filterInput {
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    border: solid 0.5px #d6d6d6;
+    outline: none;
+    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    width: 70%;
+    align-self: center;
+}
 
+.filterContainer > div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 20%;
+    color: #0047AB;
+}
+
+#tableTitle{
+    background-color: #0047ab;
+    text-transform: uppercase;
 }

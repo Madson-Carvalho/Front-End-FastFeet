@@ -3,7 +3,7 @@ import React from "react";
 import {useTable, useFilters, usePagination} from "react-table";
 import {TextFilter} from "./FilterTable";
 
-export default function ReactTable({columns, data}) {
+export default function ReactTable({columns, data, title}) {
     const {
         getTableProps,
         getTableBodyProps,
@@ -31,7 +31,7 @@ export default function ReactTable({columns, data}) {
             {headerGroups.map(headerGroup => (
                 headerGroup.headers.filter(x => x.enableColumFilter)).length > 0 ?
                 <div className="filterContainer" key={headerGroup.id}>
-                    {headerGroup.headers.map(column => (
+                    {headerGroup.headers.filter(x => x.enableColumFilter).map(column => (
                         <div key={column.id}>
                             {column.enableColumFilter ? <b>{column.render("Header").toUpperCase()}</b> : null}
                             {column.enableColumFilter ? <TextFilter column={column}/> : null}
@@ -42,6 +42,12 @@ export default function ReactTable({columns, data}) {
             )}
             <table className="customTable">
                 <thead>
+                {headerGroups[0].headers.length > 0 ?
+                    <tr>
+                        <th colSpan={headerGroups[0].headers.length} id="tableTitle">
+                            {title}
+                        </th>
+                    </tr> : null}
                 {headerGroups.map(headerGroup => (
                     <tr key={headerGroup.id}>
                         {headerGroup.headers.map(column => (
