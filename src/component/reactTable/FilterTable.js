@@ -6,7 +6,7 @@ export const TextFilter = ({column}) => {
         <input className="filterInput"
                value={filterValue || ""}
                onChange={e => setFilter(e.target.value || undefined)}
-               placeholder={`Digite para buscar`}
+               placeholder={`Digite para buscar...`}
         />
     );
 };

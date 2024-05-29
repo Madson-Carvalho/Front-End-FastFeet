@@ -3,7 +3,7 @@ import React from "react";
 import {useTable, useFilters, usePagination} from "react-table";
 import {TextFilter} from "./FilterTable";
 
-export default function ReactTable({columns, data}) {
+export default function ReactTable({columns, data, title}) {
     const {
         getTableProps,
         getTableBodyProps,
@@ -29,55 +29,64 @@ export default function ReactTable({columns, data}) {
     return (
         <div className="tableListSchema">
             {headerGroups.map(headerGroup => (
-                <div className="filterInput" key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map(column => (
-                        <div key={column.id} {...column.getHeaderProps()}>
+                headerGroup.headers.filter(x => x.enableColumFilter)).length > 0 ?
+                <div className="filterContainer" key={headerGroup.id}>
+                    {headerGroup.headers.filter(x => x.enableColumFilter).map(column => (
+                        <div key={column.id}>
                             {column.enableColumFilter ? <b>{column.render("Header").toUpperCase()}</b> : null}
                             {column.enableColumFilter ? <TextFilter column={column}/> : null}
                         </div>
                     ))}
                 </div>
-            ))}
-            <table {...getTableProps()} className="customTable">
+                : null
+            )}
+            <table className="customTable">
                 <thead>
+                {headerGroups[0].headers.length > 0 ?
+                    <tr>
+                        <th colSpan={headerGroups[0].headers.length} id="tableTitle">
+                            {title}
+                        </th>
+                    </tr> : null}
                 {headerGroups.map(headerGroup => (
-                    <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
+                    <tr key={headerGroup.id}>
                         {headerGroup.headers.map(column => (
-                            <th key={column.id} {...column.getHeaderProps()}>
+                            <th key={column.id}>
                                 {column.render("Header").toUpperCase()}
                             </th>
                         ))}
                     </tr>
                 ))}
                 </thead>
-                <tbody {...getTableBodyProps()}>
+                <tbody>
                 {page.map((row) => {
                     prepareRow(row);
                     return (
-                        <tr key={row.id} {...row.getRowProps()}>
+                        <tr key={row.id}>
                             {row.cells.map(cell => {
-                                return <td key={cell.id} {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                                return <td key={cell.id}>{cell.render("Cell")}</td>;
                             })}
                         </tr>
                     );
                 })}
                 </tbody>
             </table>
-            <div>
-                <button className='customButton' onClick={() => previousPage()} disabled={!canPreviousPage}>
-                    Anterior
-                </button>
-                <button className='customButton' onClick={() => nextPage()} disabled={!canNextPage}>
-                    Próxima
-                </button>
-                <div style={{margin: 5}}>
+            <div className="tableFooter">
+                <div>
                     Página{' '}
                     <em>
                         {pageIndex + 1} de {pageOptions.length}
                     </em>
                 </div>
-                <select style={{padding: 5, borderRadius: 5, marginBottom: 15}}
-                        value={pageSize}
+                <div>
+                    <button className='customButton' onClick={() => previousPage()} disabled={!canPreviousPage}>
+                        Anterior
+                    </button>
+                    <button className='customButton' onClick={() => nextPage()} disabled={!canNextPage}>
+                        Próxima
+                    </button>
+                </div>
+                <select value={pageSize}
                         onChange={e => {
                             setPageSize(Number(e.target.value));
                         }}
