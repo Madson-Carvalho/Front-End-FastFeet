@@ -4,6 +4,7 @@ import NotFound from "../pages/notFound/NotFound";
 import RegisterUser from "../pages/registerUser/RegisterUser";
 import Login from "../pages/Login/Login";
 import ListUser from "../pages/listUser/ListUser";
+import PackageList from "../pages/packageList/PackageList";
 
 const PersonRoutes = () => {
     return (
@@ -13,6 +14,7 @@ const PersonRoutes = () => {
             <Route path='/users' element={<ListUser/>}/>
             <Route path='*' element={<NotFound/>}/>
             <Route path={'/login'} element={<Login/>}/>
+            <Route path="/packages" element= {<PackageList/>}/>
         </Routes>
     )
 }
