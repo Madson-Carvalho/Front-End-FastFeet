@@ -87,3 +87,12 @@
     background-color: #0047ab;
     text-transform: uppercase;
 }
+
+button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    background-color: #0047ab;
+    color: #fff;
+    cursor: pointer;
+}

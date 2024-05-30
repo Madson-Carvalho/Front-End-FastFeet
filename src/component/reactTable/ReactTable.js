@@ -2,11 +2,11 @@ import './ReactTable.css';
 import React from "react";
 import {useTable, useFilters, usePagination} from "react-table";
 import {TextFilter} from "./FilterTable";
+import {faHome, faPencil, faRemove} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default function ReactTable({columns, data, title}) {
     const {
-        getTableProps,
-        getTableBodyProps,
         headerGroups,
         page,
         prepareRow,
@@ -64,15 +64,19 @@ export default function ReactTable({columns, data, title}) {
                     return (
                         <tr key={row.id}>
                             {row.cells.map(cell => {
-                                return <td key={cell.id}>{cell.render("Cell")}</td>;
+                                return <td key={cell.id}>{cell.render("Cell")}</td>
                             })}
+                            <td>
+                                <button>Editar<FontAwesomeIcon icon={faPencil} inverse/></button>
+                                <button>Remover<FontAwesomeIcon icon={faRemove} inverse/></button>
+                            </td>
                         </tr>
                     );
                 })}
                 </tbody>
             </table>
             <div className="tableFooter">
-                <div>
+            <div>
                     Página{' '}
                     <em>
                         {pageIndex + 1} de {pageOptions.length}
