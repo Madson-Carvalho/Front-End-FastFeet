@@ -10,7 +10,7 @@ const Header = () => {
             <Link to={'/'}><img src={logo}/></Link>
             <nav>
                 <Link to={'/'} title="Home"><FontAwesomeIcon icon={faHome} inverse/> home</Link>
-                <Link to={'/create-user'}><FontAwesomeIcon icon={faUserPlus} inverse/>novo usuário</Link>
+                <Link to={'/users'}><FontAwesomeIcon icon={faUser} inverse/> usuário</Link>
             </nav>
         </header>
     )
