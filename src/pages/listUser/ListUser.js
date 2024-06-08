@@ -2,43 +2,21 @@ import Header from "../../component/header/Header";
 import Main from "../../component/main/Main";
 import ReactTable from "../../component/reactTable/ReactTable";
 import Footer from "../../component/footer/Footer";
+import {useEffect, useState} from "react";
 
 const ListUser = () => {
-    const users = [
-        {
-            nome: 'João Silva',
-            cpf: '123.456.789-00',
-            senha: 'password123',
-            perfil: 'admin',
-            endereco: 'Rua A, 123, Bairro B, Cidade C',
-            email: 'joao.silva@example.com',
-            telefone: '(11) 98765-4321'
-        },
-        {
-            nome: 'Maria Oliveira',
-            cpf: '987.654.321-00',
-            senha: 'senha456',
-            perfil: 'entregador',
-            endereco: 'Avenida X, 456, Bairro Y, Cidade Z',
-            email: 'maria.oliveira@example.com',
-            telefone: '(22) 97654-3210'
-        }
-    ];
+    const url = `http://localhost:3333/api/v1/users/find-all`;
+    const [users, setUsers] = useState([]);
 
     const columns = [
         {
             Header: 'Nome',
-            accessor: 'nome',
+            accessor: 'name',
             enableColumFilter: true
         },
         {
             Header: 'CPF',
             accessor: 'cpf',
-            enableColumFilter: true
-        },
-        {
-            Header: 'Senha',
-            accessor: 'senha',
             enableColumFilter: true
         },
         {
@@ -48,20 +26,25 @@ const ListUser = () => {
         },
         {
             Header: 'Endereço',
-            accessor: 'endereco',
+            accessor: 'address',
             enableColumFilter: true
         },
         {
             Header: 'E-mail',
             accessor: 'email',
-            enableColumFilter: true
         },
         {
             Header: 'Telefone',
-            accessor: 'telefone',
-            enableColumFilter: true
+            accessor: 'phone',
         }
     ];
+
+    useEffect(() => {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => setUsers(data))
+            .catch(error => console.error('Erro ao buscar Usuários:', error));
+    }, []);
 
     return (
         <>
