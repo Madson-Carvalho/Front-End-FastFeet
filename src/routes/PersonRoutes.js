@@ -7,6 +7,7 @@ import ListUser from "../pages/listUser/ListUser";
 import RegisterRecipient from "../pages/registerRecipient/RegisterRecipient";
 import ListRecipient from "../pages/listRecipient/ListRecipient";
 import PackageList from "../pages/packageList/PackageList";
+import PackageRegistration from "../pages/packageRegistration/PackageRegistration";
 
 const PersonRoutes = () => {
     return (
@@ -19,6 +20,7 @@ const PersonRoutes = () => {
             <Route path={'/register-recipient'} element={<RegisterRecipient/>}/>
             <Route path={'/list-recipient'} element={<ListRecipient/>}/>
             <Route path="/packages" element= {<PackageList/>}/>
+            <Route path="/package-registration" element= {<PackageRegistration/>}/>
         </Routes>
     )
 }

@@ -51,7 +51,7 @@ const PackageList = () => {
     return (
         <>
             <Header/>
-            <Main title="Lista de Encomendas" url="/create-package">
+            <Main title="Lista de Encomendas" url="/package-registration">
                 <ReactTable title="Encomendas" data={data} columns={columns}/>
             </Main>
             <Footer/>

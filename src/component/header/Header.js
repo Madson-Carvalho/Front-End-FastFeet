@@ -1,7 +1,7 @@
 import "./Header.css";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHome, faPeace, faUser, faUserPlus} from "@fortawesome/free-solid-svg-icons";
+import {faHome, faPeace, faUser, faBoxOpen} from "@fortawesome/free-solid-svg-icons";
 import logo from "../../assets/image/logo-removebg-preview.png";
 
 const Header = () => {
@@ -11,7 +11,7 @@ const Header = () => {
             <nav>
                 <Link to={'/'} title="Home"><FontAwesomeIcon icon={faHome} inverse/> home</Link>
                 <Link to={'/users'}><FontAwesomeIcon icon={faUser} inverse/> usuário</Link>
-                <Link to={'/packages'}><FontAwesomeIcon icon={faPeace} inverse/> Encomenda</Link>
+                <Link to={'/packages'}><FontAwesomeIcon icon={faBoxOpen} inverse/> Encomenda</Link>
             </nav>
         </header>
     )
