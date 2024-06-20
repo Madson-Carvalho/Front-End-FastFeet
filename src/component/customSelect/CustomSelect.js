@@ -1,9 +1,9 @@
 import './CustomSelect.css';
 
-const CustomSelect = ({ name, id, options, label, onChange}) => {
+const CustomSelect = ({ name, id, options, label, onChange, required}) => {
     return (
         <div className="input-group defaultInputs">
-            <select name={name} id={id} onChange={onChange}>
+            <select name={name} id={id} onChange={onChange} required={required}>
                 <option value={''}>-- Selecione uma opção --</option>
                 {options.map(option => (
                     <option key={option.value} value={option.value}>{option.name}</option>

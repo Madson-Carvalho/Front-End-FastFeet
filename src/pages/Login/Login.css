@@ -74,11 +74,19 @@
 
 #idImagem {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     color: #fff ;
     font-size: 1.2rem;
+    padding: 0 1rem;
 }
 
+#idImagem>span {
+    display: flex;
+    align-items: center;
+}
 
+#papa {
+    height: 7rem;
+}
 
