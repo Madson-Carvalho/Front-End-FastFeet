@@ -4,7 +4,7 @@ const accessPerfil = [
         name: "Administrador"
     },
     {
-        value: "ENTREGADOR",
+        value: "DELIVERY_MAN",
         name: "Entregador"
     }
 ]

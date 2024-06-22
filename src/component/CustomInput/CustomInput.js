@@ -1,22 +1,24 @@
 import './CustomInput.css';
 import InputMask from "react-input-mask";
 
-const CustomInput = ({type, name, id, label, placeholder}) => {
+const CustomInput = ({type, name, id, label, placeholder, required, onChange}) => {
     const isCPF = name === 'cpf';
+    const isPhone = name === 'phone';
 
     return (
         <div className="input-group defaultInputs">
-            {isCPF ? (
+            {isCPF || isPhone ? (
                 <InputMask
-                    mask="999.999.999-99"
+                    mask= {isCPF ? "999.999.999-99" : "(99) 99999-9999"}
                     id={id}
                     name={name}
                     placeholder={placeholder}
+                    onChange={onChange}
                 >
-                    {(inputProps) => <input {...inputProps} type={type} />}
+                    {(inputProps) => <input {...inputProps} type={type} required={required}/>}
                 </InputMask>
             ) : (
-                <input type={type} name={name} id={id} placeholder={placeholder} />
+                <input type={type} name={name} id={id} placeholder={placeholder} required={required} onChange={onChange}/>
             )}
             <label className="label" htmlFor={id}>{label}</label>
         </div>
