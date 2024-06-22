@@ -45,7 +45,7 @@ const ListRecipient = () => {
         })
             .then(response => response.json())
             .then(data => setRecipient(data))
-            .catch(error => console.error('Erro ao buscar Usuários:', error));
+            .catch(error => console.error('Erro ao buscar Destinatários:', error));
     }, []);
 
 

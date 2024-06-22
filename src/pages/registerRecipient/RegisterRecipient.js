@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import {useNavigate} from "react-router-dom";
 
 const RegisterRecipient = () => {
-    const [recipientData, setrecipientData] = useState({
+    const [recipientData, setRecipientData] = useState({
         name: "",
         cpf: "",
         phone: "",
@@ -58,7 +58,7 @@ const RegisterRecipient = () => {
     const navigate = useNavigate();
 
     const handleChange = (event) => {
-        setrecipientData({...recipientData, [event.target.name]: event.target.value});
+        setRecipientData({...recipientData, [event.target.name]: event.target.value});
     }
 
     useEffect(() => {
@@ -93,12 +93,12 @@ const RegisterRecipient = () => {
             body: JSON.stringify(dataToSave)
         })
             .then(response => {
-                toast.success("Usuário cadastrado com sucesso!");
+                toast.success("Destinatário cadastrado com sucesso!");
                 setTimeout(() => {
                     navigate('/list-recipient');
                 }, 3000);
             })
-            .catch(e => toast.error('Erro ao cadastrar usuário', e))
+            .catch(e => toast.error('Erro ao cadastrar Destinatário', e))
     }
 
     return (
