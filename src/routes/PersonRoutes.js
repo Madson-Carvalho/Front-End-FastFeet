@@ -6,6 +6,8 @@ import Login from "../pages/Login/Login";
 import ListUser from "../pages/listUser/ListUser";
 import RegisterRecipient from "../pages/registerRecipient/RegisterRecipient";
 import ListRecipient from "../pages/listRecipient/ListRecipient";
+import PackageList from "../pages/packageList/PackageList";
+import PackageRegistration from "../pages/packageRegistration/PackageRegistration";
 import ProtectedRoute from "./ProtectedRoute";
 
 const PersonRoutes = () => {
@@ -18,7 +20,11 @@ const PersonRoutes = () => {
             <Route path='/users' element={<ProtectedRoute> <ListUser/> </ProtectedRoute>}/>
             <Route path='*' element={<ProtectedRoute> <NotFound/> </ProtectedRoute>}/>
             <Route path={'/register-recipient'} element={<ProtectedRoute> <RegisterRecipient/> </ProtectedRoute>}/>
+            <Route path={'/edit-recipient/:id'} element={<ProtectedRoute> <RegisterRecipient/> </ProtectedRoute>}/>
             <Route path={'/list-recipient'} element={<ProtectedRoute> <ListRecipient/> </ProtectedRoute>}/>
+            <Route path={'/packages'} element= {<ProtectedRoute> <PackageList/> </ProtectedRoute> }/>
+            <Route path={'/package-registration'} element= {<ProtectedRoute> <PackageRegistration/> </ProtectedRoute> }/>
+            <Route path={'/edit-package/:id'} element= {<ProtectedRoute> <PackageRegistration/> </ProtectedRoute> }/>
         </Routes>
     )
 }
