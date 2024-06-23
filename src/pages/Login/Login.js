@@ -7,6 +7,7 @@ import papa from '../../assets/image/papaleguas-removebg-preview.png';
 import CustomInput from "../../component/CustomInput/CustomInput";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
 
 const Login = () => {
 
@@ -42,10 +43,18 @@ const Login = () => {
             .then(response => response.json())
             .then(response => {
                 const token = response.token;
-                localStorage.setItem('authToken', token);
-                navigate('/users');
+
+                if(token){
+                    localStorage.setItem('authToken', token);
+                    toast.success("Usuário logado com sucesso")
+                    setTimeout(() => {
+                        navigate('/users');
+                    }, 1500);
+                }else{
+                    toast.error(`usuário ou senha incorretos`)
+                }
             })
-            .catch(e => console.error(`usuário ou senha incorretos`, e))
+            .catch(e => toast.error(`usuário ou senha incorretos`, e))
     }
 
     return (
@@ -68,6 +77,18 @@ const Login = () => {
                         </form>
                     </div>
                 </div>
+                <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
             </div>
         </>
     )

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import ConfirmDeleteModal from "../../utils/modal/confirmDeleteModal";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 const ListUser = () => {
     
@@ -59,9 +59,9 @@ const ListUser = () => {
             .then(response => response.json())
             .then(data => setUsers(data))
             .catch(error => toast.error('Erro ao buscar Usuários:', error));
-    }, []);
+    }, [users]);
 
-    const removeEnity = (id) => {
+    const removeEntity = (id) => {
         fetch(url + `/remove/${id}`, {
             method: 'DELETE',
             headers: {
@@ -85,8 +85,7 @@ const ListUser = () => {
     };
 
     const confirmDelete = () => {
-        removeEnity(rowToDelete.id)
-        setUsers(users.filter(item => item.id !== rowToDelete.id));
+        removeEntity(rowToDelete.id)
         setIsModalOpen(false);
         setRowToDelete(null);
     };
@@ -109,6 +108,18 @@ const ListUser = () => {
                 />
             </Main>
             <Footer />
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </>
     );
 };
