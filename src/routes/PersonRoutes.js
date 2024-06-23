@@ -18,6 +18,7 @@ const PersonRoutes = () => {
             <Route path='/users' element={<ProtectedRoute> <ListUser/> </ProtectedRoute>}/>
             <Route path='*' element={<ProtectedRoute> <NotFound/> </ProtectedRoute>}/>
             <Route path={'/register-recipient'} element={<ProtectedRoute> <RegisterRecipient/> </ProtectedRoute>}/>
+            <Route path={'/edit-recipient/:id'} element={<ProtectedRoute> <RegisterRecipient/> </ProtectedRoute>}/>
             <Route path={'/list-recipient'} element={<ProtectedRoute> <ListRecipient/> </ProtectedRoute>}/>
         </Routes>
     )
