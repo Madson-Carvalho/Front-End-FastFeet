@@ -4,7 +4,6 @@
 }
 
 .customTable th, .customTable td {
-    border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 0.5rem;
 }
 
@@ -39,7 +38,6 @@
     padding: 1rem 0.5rem;
     min-width: 98%;
     max-width: 98%;
-    border: 1px solid rgba(0, 0, 0, 0.1);
     flex-wrap: wrap;
     gap: 0.5rem 0;
 }
@@ -86,7 +84,7 @@
     color: #0047AB;
 }
 
-#tableTitle{
+#tableTitle {
     background-color: #0047ab;
     text-transform: uppercase;
 }
