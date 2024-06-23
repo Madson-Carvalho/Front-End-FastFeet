@@ -15,7 +15,8 @@ const PackageRegistration = () => {
     const { id } = useParams();
     const isEditMode = !!id;
 
-    const [userData, setUserData] = useState({
+    const [packageData, setPackageData
+    ] = useState({
         // recipient: "",
         deliveryMan: "",
         requestDate: "",
@@ -31,7 +32,7 @@ const PackageRegistration = () => {
     const token = localStorage.getItem('authToken');
     const [cities, setCities] = useState([]);
     const navigate = useNavigate();
-    const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${userData.uf}/municipios`;
+    const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${packageData.uf}/municipios`;
 
     const ufs = [
         {name: 'Acre', value: 'AC'},
@@ -64,7 +65,7 @@ const PackageRegistration = () => {
     ];
 
     const handleChange = (event) => {
-        setUserData({...userData, [event.target.name]: event.target.value});
+        setPackageData({...packageData, [event.target.name]: event.target.value});
     }
 
     const handleSubmit = (e) => {
@@ -72,12 +73,12 @@ const PackageRegistration = () => {
 
         const dataToSave = {
             // recipient: userData.recipient,
-            deliveryMan: userData.deliveryMan,
-            requestDate: new Date(userData.requestDate),
-            previusRequestDate: new Date(userData.previusRequestDate),
-            deliveryDate: new Date(userData.deliveryDate),
-            status: userData.status,
-            deliveryAddress: `${userData.deliveryAddress}, ${userData.city} - ${userData.uf.toUpperCase()}`
+            deliveryMan: packageData.deliveryMan,
+            requestDate: new Date(packageData.requestDate),
+            previusRequestDate: new Date(packageData.previusRequestDate),
+            deliveryDate: new Date(packageData.deliveryDate),
+            status: packageData.status,
+            deliveryAddress: `${packageData.deliveryAddress}, ${packageData.city} - ${packageData.uf.toUpperCase()}`
         }
 
         fetch(postEndpoint, {
@@ -112,7 +113,7 @@ const PackageRegistration = () => {
                 setCities(mappedCities);
             })
             .catch(error => console.error('Erro ao buscar municípios:', error));
-    }, [userData.uf]);
+    }, [packageData.uf]);
 
     useEffect(() => {
         if (isEditMode) {
@@ -124,7 +125,7 @@ const PackageRegistration = () => {
             })
                 .then(response => response.json())
                 .then(data => {
-                    setUserData({
+                    setPackageData({
                         deliveryMan: data.deliveryMan,
                         requestDate: formatDataToInput(data.requestDate),
                         previusRequestDate: formatDataToInput(data.previusRequestDate),
@@ -149,29 +150,29 @@ const PackageRegistration = () => {
                     {/*<CustomInput id='recipient' type='text' name='recipient' label='Destinatário' placeholder=" " value={userData.recipient}*/}
                     {/*    onChange={handleChange} />*/}
                     <CustomInput id='deliveryMan' type='text' name='deliveryMan' label='Entregador' placeholder=" "
-                                 value={userData.deliveryMan}
+                                 value={packageData.deliveryMan}
                                  onChange={handleChange}/>
                     <CustomInput id='requestDate' type='datetime-local' name='requestDate' label='Data do Pedido'
-                                 placeholder=" " required={true} value={userData.requestDate}
+                                 placeholder=" " required={true} value={packageData.requestDate}
                                  onChange={handleChange}/>
                     <CustomInput id='previusRequestDate' type='datetime-local' name='previusRequestDate'
                                  label='Data prevista para entrega' placeholder=" " required={true}
-                                 value={userData.previusRequestDate}
+                                 value={packageData.previusRequestDate}
                                  onChange={handleChange}/>
                     <CustomInput id='deliveryDate' type='datetime-local' name='deliveryDate'
                                  label='Data para realizar entrega' placeholder=" " required={true}
-                                 value={userData.deliveryDate}
+                                 value={packageData.deliveryDate}
                                  onChange={handleChange}/>
                     <CustomSelect id='status' name='status' label='Status da encomenda' options={statusPackage}
-                                  required={true} value={userData.status}
+                                  required={true} value={packageData.status}
                                   onChange={handleChange}/>
                     <CustomInput id='deliveryAddress' type='text' name='deliveryAddress' label='Endereço'
-                                 placeholder=" " required={true} value={userData.deliveryAddress}
+                                 placeholder=" " required={true} value={packageData.deliveryAddress}
                                  onChange={handleChange}/>
-                    <CustomSelect id='uf' name='uf' label='Estado' options={ufs} required={true} value={userData.uf}
+                    <CustomSelect id='uf' name='uf' label='Estado' options={ufs} required={true} value={packageData.uf}
                                   onChange={handleChange}/>
                     <CustomSelect id='city' name='city' label='Cidade' options={cities} required={true}
-                                  value={userData.city}
+                                  value={packageData.city}
                                   onChange={handleChange}/>
                     <CustomInputSubmit value='Salvar'/>
                 </form>

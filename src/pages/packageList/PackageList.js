@@ -72,7 +72,7 @@ const PackageList = () => {
             .catch(error => toast.error('Erro ao buscar Encomenda:', error));
     }, []);
 
-    const removeEnity = (id) => {
+    const removeEntity = (id) => {
         fetch(url + `/remove/${id}`, {
             method: 'DELETE',
             headers: {
@@ -96,7 +96,7 @@ const PackageList = () => {
     };
 
     const confirmDelete = () => {
-        removeEnity(rowToDelete.id)
+        removeEntity(rowToDelete.id)
         setPackages(packages.filter(item => item.id !== rowToDelete.id));
         setIsModalOpen(false);
         setRowToDelete(null);
