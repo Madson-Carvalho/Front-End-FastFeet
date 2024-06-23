@@ -6,18 +6,19 @@ import Login from "../pages/Login/Login";
 import ListUser from "../pages/listUser/ListUser";
 import RegisterRecipient from "../pages/registerRecipient/RegisterRecipient";
 import ListRecipient from "../pages/listRecipient/ListRecipient";
+import ProtectedRoute from "./ProtectedRoute";
 
 const PersonRoutes = () => {
     return (
         <Routes>
-            <Route path={'/'} element={<Home/>}/>
-            <Route path={'/create-user'} element={<RegisterUser/>}/>
-            <Route path={'/edit-user/:id'} element={<RegisterUser/>}/>
-            <Route path='/users' element={<ListUser/>}/>
-            <Route path='*' element={<NotFound/>}/>
             <Route path={'/login'} element={<Login/>}/>
-            <Route path={'/register-recipient'} element={<RegisterRecipient/>}/>
-            <Route path={'/list-recipient'} element={<ListRecipient/>}/>
+            <Route path={'/'} element={<ProtectedRoute> <Home/> </ProtectedRoute>}/>
+            <Route path={'/create-user'} element={<ProtectedRoute> <RegisterUser/> </ProtectedRoute>}/>
+            <Route path={'/edit-user/:id'} element={<ProtectedRoute> <RegisterUser/> </ProtectedRoute>}/>
+            <Route path='/users' element={<ProtectedRoute> <ListUser/> </ProtectedRoute>}/>
+            <Route path='*' element={<ProtectedRoute> <NotFound/> </ProtectedRoute>}/>
+            <Route path={'/register-recipient'} element={<ProtectedRoute> <RegisterRecipient/> </ProtectedRoute>}/>
+            <Route path={'/list-recipient'} element={<ProtectedRoute> <ListRecipient/> </ProtectedRoute>}/>
         </Routes>
     )
 }
