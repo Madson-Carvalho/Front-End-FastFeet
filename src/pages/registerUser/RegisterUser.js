@@ -17,7 +17,6 @@ const RegisterUser = () => {
     const navigate = useNavigate();
 
     const token = localStorage.getItem('authToken');
-
     
     const [userData, setUserData] = useState({
         name: "",
@@ -35,7 +34,7 @@ const RegisterUser = () => {
         if (isEditMode) {
             fetch(`http://localhost:3333/api/v1/users/find-by-id/${id}`, {
                 headers: {
-                    'Authorization': token,
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 }
             })
@@ -127,7 +126,7 @@ const RegisterUser = () => {
         fetch(postEndpoint, {
             method: method,
             headers: {
-                'Authorization': token,
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(dataToSave)

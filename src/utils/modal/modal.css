@@ -38,11 +38,11 @@
 }
 
 .confirm-modal-buttons button:first-child {
-    background-color: #ca0c05;
+    background-color: #4CAF50;
     color: #fff;
 }
 
 .confirm-modal-buttons button:last-child {
-    background-color: #0047ab;
+    background-color: #FF5733;
     color: #fff;
 }
