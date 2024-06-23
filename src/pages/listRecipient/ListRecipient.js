@@ -3,10 +3,21 @@ import Main from "../../component/main/Main";
 import ReactTable from "../../component/reactTable/ReactTable";
 import Footer from "../../component/footer/Footer";
 import {useEffect, useState} from "react";
+import ConfirmDeleteModal from "../../utils/modal/confirmDeleteModal";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from 'react-toastify';
 
 const ListRecipient = () => {
-    const url =`http://localhost:3333/api/v1/recipient/find-all`;
+
+    const url = `http://localhost:3333/api/v1/recipient`;
+
+    const token = localStorage.getItem('authToken');
+
     const [recipient, setRecipient] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [rowToDelete, setRowToDelete] = useState(null);
+    const navigate = useNavigate();
 
     const columns = [
         {
@@ -37,27 +48,66 @@ const ListRecipient = () => {
     ];
 
     useEffect(() => {
-        fetch(url, {
-            method: "GET",
+        fetch(url + "/find-all", {
             headers: {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1MmJmMzExLTZiZDctNDBkMS1iYTlhLWQ0M2Q4YTA5YTg2NSIsImlhdCI6MTcxOTA5MjczMCwiZXhwIjoxNzE5MDk2MzMwfQ.LGLMoL6xbZL2J5elV1nX8CRsjeFIb5dH-RWxoLfVDdE',
+                'Authorization': `Bearer ${token}`,
             }
         })
             .then(response => response.json())
             .then(data => setRecipient(data))
-            .catch(error => console.error('Erro ao buscar Destinatários:', error));
+            .catch(error => toast.error('Erro ao buscar Destinatário:', error));
     }, []);
 
+    const removeEntity = (id) => {
+        fetch(url + `/remove/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => {
+                toast.success('Destinatário removido com sucesso!');
+            })
+            .catch(error => toast.error('Erro ao remover Destinatário:', error));
+    }
+
+    const handleEdit = (row) => {
+        navigate(`/edit-recipient/${row?.id}`);
+    };
+
+    const handleDelete = (row) => {
+        setRowToDelete(row);
+        setIsModalOpen(true);
+    };
+
+    const confirmDelete = () => {
+        removeEntity(rowToDelete.id)
+        setRecipient(recipient.filter(item => item.id !== rowToDelete.id));
+        setIsModalOpen(false);
+        setRowToDelete(null);
+    };
 
     return (
         <>
-            <Header/>
+            <Header />
             <Main title="Lista de Destinatários" url="/register-recipient">
-                <ReactTable title="Destinatários" data={recipient} columns={columns}/>
+                <ReactTable
+                    columns={columns}
+                    data={recipient}
+                    title="Destinatários"
+                    onEdit={handleEdit}
+                    onDelete={handleDelete}
+                />
+                <ConfirmDeleteModal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    onConfirm={confirmDelete}
+                />
             </Main>
-            <Footer/>
+            <Footer />
         </>
-    )
-}
+    );
+};
 
 export default ListRecipient;
