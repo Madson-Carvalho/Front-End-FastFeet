@@ -5,7 +5,7 @@ import Footer from "../../component/footer/Footer";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import ConfirmDeleteModal from "../../utils/modal/confirmDeleteModal";
 import formatDateToTable from "../../utils/formatDateToTable";
 
@@ -120,6 +120,18 @@ const PackageList = () => {
                 />
             </Main>
             <Footer/>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </>
     )
 }
