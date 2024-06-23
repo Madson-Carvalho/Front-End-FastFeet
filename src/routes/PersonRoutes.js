@@ -21,8 +21,9 @@ const PersonRoutes = () => {
             <Route path='*' element={<ProtectedRoute> <NotFound/> </ProtectedRoute>}/>
             <Route path={'/register-recipient'} element={<ProtectedRoute> <RegisterRecipient/> </ProtectedRoute>}/>
             <Route path={'/list-recipient'} element={<ProtectedRoute> <ListRecipient/> </ProtectedRoute>}/>
-            <Route path="/packages" element= {<PackageList/>}/>
-            <Route path="/package-registration" element= {<PackageRegistration/>}/>
+            <Route path={'/packages'} element= {<ProtectedRoute> <PackageList/> </ProtectedRoute> }/>
+            <Route path={'/package-registration'} element= {<ProtectedRoute> <PackageRegistration/> </ProtectedRoute> }/>
+            <Route path={'/edit-package/:id'} element= {<ProtectedRoute> <PackageRegistration/> </ProtectedRoute> }/>
         </Routes>
     )
 }
