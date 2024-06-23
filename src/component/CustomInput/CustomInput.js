@@ -1,7 +1,7 @@
 import './CustomInput.css';
 import InputMask from "react-input-mask";
 
-const CustomInput = ({type, name, id, label, placeholder, required, onChange}) => {
+const CustomInput = ({type, name, id, label, placeholder, required, onChange, value}) => {
     const isCPF = name === 'cpf';
     const isPhone = name === 'phone';
 
@@ -14,11 +14,12 @@ const CustomInput = ({type, name, id, label, placeholder, required, onChange}) =
                     name={name}
                     placeholder={placeholder}
                     onChange={onChange}
+                    value={value}
                 >
                     {(inputProps) => <input {...inputProps} type={type} required={required}/>}
                 </InputMask>
             ) : (
-                <input type={type} name={name} id={id} placeholder={placeholder} required={required} onChange={onChange}/>
+                <input type={type} name={name} id={id} placeholder={placeholder} required={required} onChange={onChange} value={value}/>
             )}
             <label className="label" htmlFor={id}>{label}</label>
         </div>

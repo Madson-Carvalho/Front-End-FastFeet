@@ -1,11 +1,10 @@
 import './ReactTable.css';
-import React from "react";
-import {useTable, useFilters, usePagination} from "react-table";
-import {TextFilter} from "./FilterTable";
-import {faHome, faPencil, faRemove} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { useTable, useFilters, usePagination } from "react-table";
+import { TextFilter } from "./FilterTable";
+import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function ReactTable({columns, data, title}) {
+export default function ReactTable({ columns, data, title, onEdit, onDelete }) {
     const {
         headerGroups,
         page,
@@ -15,7 +14,7 @@ export default function ReactTable({columns, data, title}) {
         canNextPage,
         canPreviousPage,
         pageOptions,
-        state: {pageIndex, pageSize},
+        state: { pageIndex, pageSize },
         setPageSize
     } = useTable(
         {
@@ -34,7 +33,7 @@ export default function ReactTable({columns, data, title}) {
                     {headerGroup.headers.filter(x => x.enableColumFilter).map(column => (
                         <div key={column.id}>
                             {column.enableColumFilter ? <b>{column.render("Header").toUpperCase()}</b> : null}
-                            {column.enableColumFilter ? <TextFilter column={column}/> : null}
+                            {column.enableColumFilter ? <TextFilter column={column} /> : null}
                         </div>
                     ))}
                 </div>
@@ -42,41 +41,52 @@ export default function ReactTable({columns, data, title}) {
             )}
             <table className="customTable">
                 <thead>
-                {headerGroups[0].headers.length > 0 ?
-                    <tr>
-                        <th colSpan={headerGroups[0].headers.length} id="tableTitle">
-                            {title}
-                        </th>
-                    </tr> : null}
-                {headerGroups.map(headerGroup => (
-                    <tr key={headerGroup.id}>
-                        {headerGroup.headers.map(column => (
-                            <th key={column.id}>
-                                {column.render("Header").toUpperCase()}
+                    {headerGroups[0].headers.length > 0 ?
+                        <tr>
+                            <th colSpan={headerGroups[0].headers.length + 1} id="tableTitle">
+                                {title}
                             </th>
-                        ))}
-                    </tr>
-                ))}
+                        </tr> : null}
+                    {headerGroups.map(headerGroup => (
+                        <tr key={headerGroup.id}>
+                            {headerGroup.headers.map(column => (
+                                <th key={column.id}>
+                                    {column.render("Header").toUpperCase()}
+                                </th>
+                            ))}
+                            <th />
+                        </tr>
+                    ))}
                 </thead>
                 <tbody>
-                {page.map((row) => {
-                    prepareRow(row);
-                    return (
-                        <tr key={row.id}>
-                            {row.cells.map(cell => {
-                                return <td key={cell.id}>{cell.render("Cell")}</td>
-                            })}
-                            <td>
-                                <button>Editar<FontAwesomeIcon icon={faPencil} inverse/></button>
-                                <button>Remover<FontAwesomeIcon icon={faRemove} inverse/></button>
-                            </td>
-                        </tr>
-                    );
-                })}
+                    {page.map((row) => {
+                        prepareRow(row);
+                        return (
+                            <tr key={row.id}>
+                                {row.cells.map(cell => {
+                                    return <td key={cell.id}>{cell.render("Cell")}</td>
+                                })}
+                                <td>
+                                    <button
+                                        className='customButton'
+                                        onClick={() => onEdit(row.original)}
+                                    >
+                                        <FontAwesomeIcon icon={faPencil} inverse />
+                                    </button>
+                                    <button
+                                        className='customButton'
+                                        onClick={() => onDelete(row.original)}
+                                    >
+                                        <FontAwesomeIcon icon={faTrash} inverse />
+                                    </button>
+                                </td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
             <div className="tableFooter">
-            <div>
+                <div>
                     Página{' '}
                     <em>
                         {pageIndex + 1} de {pageOptions.length}
@@ -91,9 +101,9 @@ export default function ReactTable({columns, data, title}) {
                     </button>
                 </div>
                 <select value={pageSize}
-                        onChange={e => {
-                            setPageSize(Number(e.target.value));
-                        }}
+                    onChange={e => {
+                        setPageSize(Number(e.target.value));
+                    }}
                 >
                     {[5, 10, 20].map(pageSize => (
                         <option key={pageSize} value={pageSize}>
