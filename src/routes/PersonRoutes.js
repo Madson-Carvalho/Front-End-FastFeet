@@ -14,6 +14,7 @@ const PersonRoutes = () => {
         <Routes>
             <Route path={'/'} element={<Home/>}/>
             <Route path={'/create-user'} element={<RegisterUser/>}/>
+            <Route path={'/edit-user/:id'} element={<RegisterUser/>}/>
             <Route path='/users' element={<ListUser/>}/>
             <Route path='*' element={<NotFound/>}/>
             <Route path={'/login'} element={<Login/>}/>

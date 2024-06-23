@@ -34,23 +34,24 @@ const Home = () => {
     const columns = [
         {
             Header: 'Nome',
-            accessor: 'nome', // chave correspondente no objeto de dados
+            accessor: 'nome',
             enableColumFilter: "asdsad"
         },
         {
             Header: 'Idade',
-            accessor: 'idade', // chave correspondente no objeto de dados
+            accessor: 'idade',
             enableColumFilter: "asdsad"
         },
         {
             Header: 'E-mail',
-            accessor: 'email',   // chave correspondente no objeto de dados
+            accessor: 'email',
             enableColumFilter: "asdsad"
         },
         {
             Header: 'Cargo',
-            accessor: 'cargo' // chave correspondente no objeto de dados
-        }
+            accessor: 'cargo',
+            enableColumFilter: "asdsad"
+        },
     ];
 
     return (

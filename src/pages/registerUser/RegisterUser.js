@@ -9,9 +9,16 @@ import CustomInputSubmit from "../../component/customInputSubmit/CustomInputSubm
 import {useEffect, useState} from "react";
 import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 const RegisterUser = () => {
+    const { id } = useParams();
+    const isEditMode = !!id;
+    const navigate = useNavigate();
+
+    const token = localStorage.getItem('authToken');
+
+    
     const [userData, setUserData] = useState({
         name: "",
         cpf: "",
@@ -24,10 +31,37 @@ const RegisterUser = () => {
         perfil: ""
     });
 
+    useEffect(() => {
+        if (isEditMode) {
+            fetch(`http://localhost:3333/api/v1/users/find-by-id/${id}`, {
+                headers: {
+                    'Authorization': token,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                setUserData({
+                    name: data.name,
+                    cpf: data.cpf,
+                    email: data.email,
+                    address: data.address.replace("-", ",").split(",")[0].trim(),
+                    uf: data.address.replace("-", ",").split(",")[2].trim(),
+                    city: data.address.replace("-", ",").split(",")[1].trim(),
+                    phone: data.phone,
+                    perfil: data.perfil
+                });
+            })
+            .catch(error => console.error('Erro ao buscar usuário:', error));
+        }
+    }, [id, isEditMode]);
+
     const [cities, setCities] = useState([]);
 
     const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${userData.uf}/municipios`;
-    const postEndpoint = `http://localhost:3333/api/v1/users/create`;
+
+    const postEndpoint = isEditMode ? `http://localhost:3333/api/v1/users/edit/${id}` : 'http://localhost:3333/api/v1/users/create';
+
     const ufs = [
         {name: 'Acre', value: 'AC'},
         {name: 'Alagoas', value: 'AL'},
@@ -58,8 +92,6 @@ const RegisterUser = () => {
         {name: 'Tocantins', value: 'TO'}
     ];
 
-    const navigate = useNavigate();
-
     const handleChange = (event) => {
         setUserData({...userData, [event.target.name]: event.target.value});
     }
@@ -76,7 +108,7 @@ const RegisterUser = () => {
             })
             .catch(error => console.error('Erro ao buscar municípios:', error));
     }, [userData.uf]);
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -89,51 +121,47 @@ const RegisterUser = () => {
             phone: userData.phone,
             address: `${userData.address}, ${userData.city} - ${userData.uf.toUpperCase()}`
         }
+
+        const method = isEditMode ? 'PUT' : 'POST';
+
         fetch(postEndpoint, {
-            method: "POST",
+            method: method,
             headers: {
+                'Authorization': token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(dataToSave)
         })
             .then(response => {
-                toast.success("Usuário cadastrado com sucesso!");
+                const action = isEditMode ? 'atualizado' : 'cadastrado';
+                toast.success(`Usuário ${action} com sucesso!`);
                 setTimeout(() => {
                     navigate('/users');
                 }, 3000);
             })
-            .catch(e => toast.error('Erro ao cadastrar usuário', e))
+            .catch(e => toast.error(`Erro ao ${isEditMode ? 'atualizar' : 'cadastrar'} usuário`, e))
     }
 
     return (
         <>
-            <Header/>
-            <Main title="Criar usuário">
+            <Header />
+            <Main title={isEditMode ? "Editar usuário" : "Criar usuário"}>
                 <form className='base-form' onSubmit={handleSubmit}>
-                    <CustomInput id='name' type='text' name='name' label='Nome' placeholder=" " onChange={handleChange}
-                                 required={true}/>
-                    <CustomInput id='cpf' type='text' name='cpf' label='CPF' placeholder=" " onChange={handleChange}
-                                 required={true}/>
-                    <CustomInput id='email' type='email' name='email' label='E-mail' placeholder=" "
-                                 onChange={handleChange} required={true}/>
-                    <CustomInput id='password' type='password' name='password' label='Senha' placeholder=" "
-                                 onChange={handleChange}
-                                 required={true}/>
-                    <CustomInput id='address' type='text' name='address' label='Endereço' placeholder=" "
-                                 onChange={handleChange}
-                                 required={true}/>
-                    <CustomSelect id='uf' name='uf' label='Estado' options={ufs} onChange={handleChange}
-                                  required={true}/>
-                    <CustomSelect id='city' name='city' label='Cidade' options={cities} onChange={handleChange}
-                                  required={true}/>
-                    <CustomInput id='phone' type='phone' name='phone' label='Telefone' placeholder=" "
-                                 onChange={handleChange}/>
-                    <CustomSelect id='perfil' name='perfil' label='Perfil' options={accessPerfil}
-                                  onChange={handleChange} required={true}/>
-                    <CustomInputSubmit value='Salvar'/>
+                    <CustomInput id='name' type='text' name='name' label='Nome' placeholder=" " value={userData.name} onChange={handleChange} required={true} />
+                    <CustomInput id='cpf' type='text' name='cpf' label='CPF' placeholder=" " value={userData.cpf} onChange={handleChange} required={true} />
+                    <CustomInput id='email' type='email' name='email' label='E-mail' placeholder=" " value={userData.email} onChange={handleChange} required={true} />
+                    {!isEditMode && (
+                        <CustomInput id='password' type='password' name='password' label='Senha' placeholder=" " value={userData.password} onChange={handleChange} required={true} />
+                    )}
+                    <CustomInput id='address' type='text' name='address' label='Endereço' placeholder=" " value={userData.address} onChange={handleChange} required={true} />
+                    <CustomSelect id='uf' name='uf' label='Estado' options={ufs} value={userData.uf} onChange={handleChange} required={true} />
+                    <CustomSelect id='city' name='city' label='Cidade' options={cities} value={userData.city} onChange={handleChange} required={true} />
+                    <CustomInput id='phone' type='phone' name='phone' label='Telefone' placeholder=" " value={userData.phone} onChange={handleChange} />
+                    <CustomSelect id='perfil' name='perfil' label='Perfil' options={accessPerfil} value={userData.perfil} onChange={handleChange} required={true} />
+                    <CustomInputSubmit value={isEditMode ? 'Atualizar' : 'Salvar'} />
                 </form>
             </Main>
-            <Footer/>
+            <Footer />
             <ToastContainer
                 position="top-center"
                 autoClose={5000}
