@@ -58,7 +58,7 @@ const ListRecipient = () => {
             .catch(error => toast.error('Erro ao buscar Destinatário:', error));
     }, []);
 
-    const removeEnity = (id) => {
+    const removeEntity = (id) => {
         fetch(url + `/remove/${id}`, {
             method: 'DELETE',
             headers: {
@@ -82,7 +82,7 @@ const ListRecipient = () => {
     };
 
     const confirmDelete = () => {
-        removeEnity(rowToDelete.id)
+        removeEntity(rowToDelete.id)
         setRecipient(recipient.filter(item => item.id !== rowToDelete.id));
         setIsModalOpen(false);
         setRowToDelete(null);
