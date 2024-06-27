@@ -3,6 +3,7 @@ import { useTable, useFilters, usePagination } from "react-table";
 import { TextFilter } from "./FilterTable";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import isPerfilAdmin from "../../utils/isPerfilAdmin";
 
 export default function ReactTable({ columns, data, title, onEdit, onDelete }) {
     const {
@@ -54,7 +55,7 @@ export default function ReactTable({ columns, data, title, onEdit, onDelete }) {
                                     {column.render("Header").toUpperCase()}
                                 </th>
                             ))}
-                            <th />
+                            {isPerfilAdmin() && <th />}
                         </tr>
                     ))}
                 </thead>
@@ -66,7 +67,7 @@ export default function ReactTable({ columns, data, title, onEdit, onDelete }) {
                                 {row.cells.map(cell => {
                                     return <td key={cell.id}>{cell.render("Cell")}</td>
                                 })}
-                                <td>
+                                {isPerfilAdmin() && <td>
                                     <button
                                         className='customButton'
                                         onClick={() => onEdit(row.original)}
@@ -79,7 +80,7 @@ export default function ReactTable({ columns, data, title, onEdit, onDelete }) {
                                     >
                                         <FontAwesomeIcon icon={faTrash} inverse />
                                     </button>
-                                </td>
+                                </td>}
                             </tr>
                         );
                     })}

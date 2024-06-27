@@ -43,9 +43,11 @@ const Login = () => {
             .then(response => response.json())
             .then(response => {
                 const token = response.token;
+                const perfil = response.perfil
 
                 if(token){
                     localStorage.setItem('authToken', token);
+                    localStorage.setItem('perfil', perfil);
                     toast.success("Usuário logado com sucesso")
                     setTimeout(() => {
                         navigate('/users');

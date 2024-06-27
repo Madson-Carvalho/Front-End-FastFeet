@@ -6,8 +6,9 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from 'react-toastify';
-import ConfirmDeleteModal from "../../utils/modal/confirmDeleteModal";
+import ConfirmDeleteModal from "../../component/modal/confirmDeleteModal";
 import formatDateToTable from "../../utils/formatDateToTable";
+import isPerfilAdmin from "../../utils/isPerfilAdmin";
 
 const PackageList = () => {
 
@@ -105,7 +106,7 @@ const PackageList = () => {
     return (
         <>
             <Header/>
-            <Main title="Lista de Encomendas" url="/package-registration">
+            <Main title="Lista de Encomendas" url={isPerfilAdmin() && "/package-registration"}>
                 <ReactTable
                     columns={columns}
                     data={packages}
