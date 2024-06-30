@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from 'react-toastify';
 import ConfirmDeleteModal from "../../utils/modal/confirmDeleteModal";
 import formatDateToTable from "../../utils/formatDateToTable";
+import statusPackage from "../../utils/statusPackage";
 
 const PackageList = () => {
 
@@ -24,7 +25,7 @@ const PackageList = () => {
 
         {
           Header: 'Entregador',
-          accessor: 'deliveryMan',
+          accessor: 'Users.name',
           enableColumFilter: true
         },
         {
@@ -66,6 +67,7 @@ const PackageList = () => {
                     packageItem.deliveryDate = formatDateToTable(packageItem.deliveryDate);
                     packageItem.previusRequestDate = formatDateToTable(packageItem.previusRequestDate);
                     packageItem.requestDate = formatDateToTable(packageItem.requestDate);
+                    packageItem.status = statusPackage.find(x => x.value === packageItem.status).name
                 })
                 setPackages(data);
             })
