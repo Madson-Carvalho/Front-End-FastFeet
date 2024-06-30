@@ -3,10 +3,11 @@ import Main from "../../component/main/Main";
 import ReactTable from "../../component/reactTable/ReactTable";
 import Footer from "../../component/footer/Footer";
 import { useEffect, useState } from "react";
-import ConfirmDeleteModal from "../../utils/modal/confirmDeleteModal";
+import ConfirmDeleteModal from "../../component/modal/confirmDeleteModal";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from 'react-toastify';
+import isPerfilAdmin from "../../utils/isPerfilAdmin";
 import accessPerfil from "../../utils/accessPerfil";
 
 const ListUser = () => {
@@ -66,7 +67,7 @@ const ListUser = () => {
                 setUsers(data)
             })
             .catch(error => toast.error('Erro ao buscar Usuários:', error));
-    }, [users]);
+    }, []);
 
     const removeEntity = (id) => {
         fetch(url + `/remove/${id}`, {
@@ -100,7 +101,7 @@ const ListUser = () => {
     return (
         <>
             <Header />
-            <Main title="Lista de Usuários" url="/create-user">
+            <Main title="Lista de Usuários" url={isPerfilAdmin() && "/create-user"} >
                 <ReactTable
                     columns={columns}
                     data={users}
