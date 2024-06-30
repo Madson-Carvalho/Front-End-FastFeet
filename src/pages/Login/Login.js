@@ -42,10 +42,11 @@ const Login = () => {
         })
             .then(response => response.json())
             .then(response => {
-                const token = response.token;
-
+                const token = response.userLogado.token;
+                const userPerfil = response.userLogado.perfil;
                 if(token){
                     localStorage.setItem('authToken', token);
+                    localStorage.setItem('perfil', userPerfil);
                     toast.success("Usuário logado com sucesso")
                     setTimeout(() => {
                         navigate('/users');

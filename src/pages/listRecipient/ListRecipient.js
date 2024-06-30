@@ -7,12 +7,15 @@ import ConfirmDeleteModal from "../../utils/modal/confirmDeleteModal";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from 'react-toastify';
+import accessPerfil from "../../utils/accessPerfil";
 
 const ListRecipient = () => {
 
     const url = `http://localhost:3333/api/v1/recipient`;
 
     const token = localStorage.getItem('authToken');
+    const perfil = localStorage.getItem('perfil');
+    const registerAutorize = perfil === accessPerfil[0].value;
 
     const [recipient, setRecipient] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -91,7 +94,7 @@ const ListRecipient = () => {
     return (
         <>
             <Header />
-            <Main title="Lista de Destinatários" url="/register-recipient">
+            <Main title="Lista de Destinatários" url={registerAutorize ? "/register-recipient" : undefined}>
                 <ReactTable
                     columns={columns}
                     data={recipient}

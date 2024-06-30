@@ -7,13 +7,14 @@ import ConfirmDeleteModal from "../../utils/modal/confirmDeleteModal";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from 'react-toastify';
+import accessPerfil from "../../utils/accessPerfil";
 
 const ListUser = () => {
     
     const url = `http://localhost:3333/api/v1/users`;
-
+    const perfil = localStorage.getItem('perfil');
     const token = localStorage.getItem('authToken');
-
+    const registerAutorize = perfil === accessPerfil[0].value;
     const [users, setUsers] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [rowToDelete, setRowToDelete] = useState(null);
@@ -59,7 +60,7 @@ const ListUser = () => {
             .then(response => response.json())
             .then(data => setUsers(data))
             .catch(error => toast.error('Erro ao buscar Usuários:', error));
-    }, [users]);
+    }, []);
 
     const removeEntity = (id) => {
         fetch(url + `/remove/${id}`, {
@@ -93,7 +94,7 @@ const ListUser = () => {
     return (
         <>
             <Header />
-            <Main title="Lista de Usuários" url="/create-user">
+            <Main title="Lista de Usuários" url={registerAutorize ? "/create-user" : undefined}>
                 <ReactTable
                     columns={columns}
                     data={users}

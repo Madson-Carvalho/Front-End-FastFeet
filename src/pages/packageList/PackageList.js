@@ -8,18 +8,20 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from 'react-toastify';
 import ConfirmDeleteModal from "../../utils/modal/confirmDeleteModal";
 import formatDateToTable from "../../utils/formatDateToTable";
+import accessPerfil from "../../utils/accessPerfil";
 
 const PackageList = () => {
 
     const url = `http://localhost:3333/api/v1/packages`;
 
     const token = localStorage.getItem('authToken');
-
+    const perfil = localStorage.getItem('perfil');
+    const registerAutorize = perfil === accessPerfil[0].value;
     const [packages, setPackages] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [rowToDelete, setRowToDelete] = useState(null);
     const navigate = useNavigate();
-
+    
     const columns = [
 
         {
@@ -105,7 +107,8 @@ const PackageList = () => {
     return (
         <>
             <Header/>
-            <Main title="Lista de Encomendas" url="/package-registration">
+            <Main title="Lista de Encomendas" url={registerAutorize ? "/package-registration" : undefined} 
+            >
                 <ReactTable
                     columns={columns}
                     data={packages}
