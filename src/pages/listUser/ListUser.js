@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from 'react-toastify';
 import isPerfilAdmin from "../../utils/isPerfilAdmin";
+import accessPerfil from "../../utils/accessPerfil";
 
 const ListUser = () => {
     
@@ -58,7 +59,13 @@ const ListUser = () => {
             }
         })
             .then(response => response.json())
-            .then(data => setUsers(data))
+            .then(data => {
+                data.forEach(user => {
+                    user.perfil = accessPerfil.find(x => x.value === user.perfil).name
+                })
+
+                setUsers(data)
+            })
             .catch(error => toast.error('Erro ao buscar Usuários:', error));
     }, []);
 

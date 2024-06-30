@@ -16,7 +16,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const [userData, setUserData] = useState({
-        email: "",
+        cpf: "",
         password: "",
     });
 
@@ -28,7 +28,7 @@ const Login = () => {
         e.preventDefault();
 
         const dataToSave = {
-            email: userData.email,
+            cpf: userData.cpf,
             password: userData.password,
         }
 
@@ -50,7 +50,7 @@ const Login = () => {
                     localStorage.setItem('perfil', perfil);
                     toast.success("Usuário logado com sucesso")
                     setTimeout(() => {
-                        navigate('/users');
+                        navigate('/');
                     }, 1500);
                 }else{
                     toast.error(`usuário ou senha incorretos`)
@@ -73,7 +73,7 @@ const Login = () => {
                     <div>
                         <FontAwesomeIcon icon={faCircleUser}/>
                         <form onSubmit={handleSubmit}>
-                            <CustomInput id="email" type="text" name="email" label="E-mail" placeholder=" " onChange={handleChange} required={true}/>
+                            <CustomInput id="cpf" type="text" name="cpf" label="CPF" placeholder=" " onChange={handleChange} required={true}/>
                             <CustomInput id="password" label="Senha" type="password" name="password" placeholder=" " onChange={handleChange} required={true}/>
                             <CustomInputSubmit value={'Entrar'} />
                         </form>
