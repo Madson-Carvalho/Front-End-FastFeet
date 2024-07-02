@@ -13,7 +13,7 @@ import statusPackage from "../../utils/statusPackage";
 
 const PackageList = () => {
 
-    const url = `http://localhost:3333/api/v1/packages`;
+    const url = `https://back-end-fastfeet.onrender.com/api/v1/packages`;
 
     const token = localStorage.getItem('authToken');
 

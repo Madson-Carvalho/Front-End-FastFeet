@@ -12,7 +12,7 @@ import accessPerfil from "../../utils/accessPerfil";
 
 const ListUser = () => {
     
-    const url = `http://localhost:3333/api/v1/users`;
+    const url = `https://back-end-fastfeet.onrender.com/api/v1/users`;
 
     const token = localStorage.getItem('authToken');
 

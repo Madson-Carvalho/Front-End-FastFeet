@@ -11,7 +11,7 @@ import isPerfilAdmin from "../../utils/isPerfilAdmin";
 
 const ListRecipient = () => {
 
-    const url = `http://localhost:3333/api/v1/recipient`;
+    const url = `https://back-end-fastfeet.onrender.com/api/v1/recipient`;
 
     const token = localStorage.getItem('authToken');
 

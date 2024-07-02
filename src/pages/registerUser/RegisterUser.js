@@ -32,7 +32,7 @@ const RegisterUser = () => {
 
     useEffect(() => {
         if (isEditMode) {
-            fetch(`http://localhost:3333/api/v1/users/find-by-id/${id}`, {
+            fetch(`https://back-end-fastfeet.onrender.com/api/v1/users/find-by-id/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -59,7 +59,7 @@ const RegisterUser = () => {
 
     const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${userData.uf}/municipios`;
 
-    const postEndpoint = isEditMode ? `http://localhost:3333/api/v1/users/edit/${id}` : 'http://localhost:3333/api/v1/users/create';
+    const postEndpoint = isEditMode ? `https://back-end-fastfeet.onrender.com/api/v1/users/edit/${id}` : 'https://back-end-fastfeet.onrender.com/api/v1/users/create';
 
     const ufs = [
         {name: 'Acre', value: 'AC'},

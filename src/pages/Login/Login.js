@@ -11,7 +11,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 const Login = () => {
 
-    const endpoint = "http://localhost:3333/api/v1/auth/login";
+    const endpoint = "https://back-end-fastfeet.onrender.com/api/v1/auth/login";
 
     const navigate = useNavigate();
 

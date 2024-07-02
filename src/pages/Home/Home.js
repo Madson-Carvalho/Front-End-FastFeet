@@ -23,9 +23,9 @@ const Home = () => {
         const findCounts = async () => {
             try {
                 const [usersResponse, recipientResponse, packagesResponse] = await Promise.all([
-                    fetch(`http://localhost:3333/api/v1/users/count`, {headers}),
-                    fetch(`http://localhost:3333/api/v1/recipient/count`, {headers}),
-                    fetch(`http://localhost:3333/api/v1/packages/count`, {headers})
+                    fetch(`https://back-end-fastfeet.onrender.com/api/v1/users/count`, {headers}),
+                    fetch(`https://back-end-fastfeet.onrender.com/api/v1/recipient/count`, {headers}),
+                    fetch(`https://back-end-fastfeet.onrender.com/api/v1/packages/count`, {headers})
                 ])
 
                 const users = await usersResponse.json()

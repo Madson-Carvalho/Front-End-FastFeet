@@ -28,7 +28,7 @@ const PackageRegistration = () => {
         city: ""
     });
 
-    const postEndpoint = isEditMode ? `http://localhost:3333/api/v1/packages/edit/${id}` : 'http://localhost:3333/api/v1/packages/create'
+    const postEndpoint = isEditMode ? `https://back-end-fastfeet.onrender.com/api/v1/packages/edit/${id}` : 'https://back-end-fastfeet.onrender.com/api/v1/packages/create'
 
     const token = localStorage.getItem('authToken');
     const [cities, setCities] = useState([]);
@@ -121,7 +121,7 @@ const PackageRegistration = () => {
 
     useEffect(() => {
         if (isEditMode) {
-            fetch(`http://localhost:3333/api/v1/packages/find-by-id/${id}`, {
+            fetch(`https://back-end-fastfeet.onrender.com/api/v1/packages/find-by-id/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
