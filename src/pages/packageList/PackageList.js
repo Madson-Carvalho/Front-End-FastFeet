@@ -10,12 +10,15 @@ import ConfirmDeleteModal from "../../component/modal/confirmDeleteModal";
 import formatDateToTable from "../../utils/formatDateToTable";
 import isPerfilAdmin from "../../utils/isPerfilAdmin";
 import statusPackage from "../../utils/statusPackage";
+import {jwtDecode} from 'jwt-decode';
 
 const PackageList = () => {
 
     const url = `https://back-end-fastfeet.onrender.com/api/v1/packages`;
 
     const token = localStorage.getItem('authToken');
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken.id;
 
     const [packages, setPackages] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -57,7 +60,7 @@ const PackageList = () => {
       ];
 
     useEffect(() => {
-        fetch(url + "/find-all", {
+        fetch(url + "/find-all/" + userId, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             }
